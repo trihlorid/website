@@ -62,4 +62,7 @@ export const TextSm = styled.div`
   p {
     margin-bottom: 2.4rem;
   }
+  @media ${device.mobile} {
+    font-size: 1.2rem;
+  }
 `;

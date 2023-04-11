@@ -31,7 +31,7 @@ export const Title = styled.div`
   line-height: 14rem;
   letter-spacing: -0.01em;
   @media ${device.mobile} {
-    font-size: 7.2rem;
+    font-size: 5.4rem;
     line-height: 11rem;
   }
 `;
@@ -57,8 +57,9 @@ const TextToLeftAnimation = keyframes`
 interface AnimateTextProps {
   startAnimation: boolean;
 }
-export const AnimateTextToLeft = styled.span<AnimateTextProps>`
+export const AnimateTextToLeftOne = styled.span<AnimateTextProps>`
   display: flex;
+  white-space: nowrap;
   position: relative;
   justify-content: flex-end;
   transition: transform 0.5s cubic-bezier(0.83, 0, 0.17, 1) 1s,
@@ -86,6 +87,20 @@ export const AnimateTextToLeft = styled.span<AnimateTextProps>`
   }
 `;
 
+export const AnimateTextToLeftToo = styled(AnimateTextToLeftOne)`
+  &:after {
+    content: 'ДЛЯ БИЗНЕСА ДЛЯ БИЗНЕСА ДЛЯ БИЗНЕСА';
+  }
+  &:before {
+    content: ' ДЛЯ БИЗНЕСА ДЛЯ БИЗНЕСА ДЛЯ БИЗНЕСА';
+    position: absolute;
+    width: 100%;
+    right: calc(-100% - 2rem);
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+`;
+
 export const TitleBottom = styled(Title)<TitleProps>`
   display: flex;
   transform: ${props => `translateX(${props.transformValue}%)`};
@@ -94,6 +109,7 @@ export const TitleBottom = styled(Title)<TitleProps>`
 export const AnimateTextToRight = styled.span<AnimateTextProps>`
   display: flex;
   position: relative;
+  white-space: nowrap;
   justify-content: flex-end;
   transition: transform 0.5s cubic-bezier(0.83, 0, 0.17, 1) 1s,
     opacity 0.7s cubic-bezier(0.83, 0, 0.17, 1) 1s;
@@ -137,7 +153,7 @@ export const ImagesContainer = styled.div<AnimateTextProps>`
   align-items: flex-end;
   justify-content: center;
   @media ${device.mobile} {
-    height: 150vh;
+    height: calc(120vh + 10rem);
   }
   img {
     object-fit: contain;
@@ -177,6 +193,9 @@ export const BottomText = styled.div<ImageContainerProps>`
   ${Container};
   position: relative;
   top: -10rem;
+  @media ${device.mobile} {
+    font-size: 4rem;
+  }
 `;
 
 export const ClickToScroll = styled.a`

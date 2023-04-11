@@ -67,9 +67,9 @@ const Top: React.FC<TopProps> = ({ startAnimation, isScrolled }: TopProps) => {
         {!isScrolled && (
           <S.Head>
             <S.TitleTop transformValue={scrollPosition * 4}>
-              <S.AnimateTextToLeft startAnimation={startAnimation}>
+              <S.AnimateTextToLeftOne startAnimation={startAnimation}>
                 IT-РЕШЕНИЯ
-              </S.AnimateTextToLeft>
+              </S.AnimateTextToLeftOne>
             </S.TitleTop>
             <S.TitleBottom transformValue={scrollPosition * 4}>
               <S.AnimateTextToRight startAnimation={startAnimation}>
@@ -77,9 +77,9 @@ const Top: React.FC<TopProps> = ({ startAnimation, isScrolled }: TopProps) => {
               </S.AnimateTextToRight>
             </S.TitleBottom>
             <S.TitleTop transformValue={scrollPosition * 4}>
-              <S.AnimateTextToLeft startAnimation={startAnimation}>
+              <S.AnimateTextToLeftToo startAnimation={startAnimation}>
                 ДЛЯ БИЗНЕСА
-              </S.AnimateTextToLeft>
+              </S.AnimateTextToLeftToo>
             </S.TitleTop>
           </S.Head>
         )}
