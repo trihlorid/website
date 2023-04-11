@@ -71,8 +71,7 @@ const Features: React.FC = () => {
             isVisible={!featuresVisible}
             onClick={() => setFeaturesVisible(true)}
           >
-            <span>Показать все преимущества</span>{' '}
-            <ArrowDown viewBox="0 0 8 10" />
+            <span>Показать все проекты</span> <ArrowDown viewBox="0 0 8 10" />
           </S.ButtonMore>
         </S.FeaturesInner>
       </S.FeaturesContainer>
