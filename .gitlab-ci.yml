@@ -1,0 +1,31 @@
+image: gitlab.boqpod.io:5050/docker/cloud-sdk:latest
+
+stages:
+  - prepare
+  - deploy
+
+variables:
+  AWS_REGISTRY_IMAGE: 858634542465.dkr.ecr.eu-central-1.amazonaws.com/laomine_frontend
+  EKS_CLUSTER_NAME: laoban-eu-central-1
+  RELEASE_NAME: laomine-frontend-${CI_ENVIRONMENT_SLUG}
+  KUBE_NAMESPACE: laomine-frontend-${CI_ENVIRONMENT_SLUG}
+
+include:
+  - project: 'helm-charts/nodejs'
+    ref: v1.8.5
+    file:
+      - 'gitlab-ci-templates/build.yml'
+      - 'gitlab-ci-templates/deploy.yml'
+
+build: 
+  extends: .build
+  only:
+    - dev
+
+deploy_development:
+  extends: .deploy
+  environment:
+    name: "development"
+    url: https://laomine.dev.laolab.org
+  only:
+    - dev

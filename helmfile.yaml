@@ -1,0 +1,54 @@
+repositories:
+  - name: laolab
+    url: https://charts.laolab.org
+
+releases:
+  - name: {{ env "RELEASE_NAME" | default "laomine" }}
+    chart: laolab/nodejs
+    namespace: {{ env "KUBE_NAMESPACE" | default "laomine-frontend" }}
+    version: v1.8.6
+    values:
+      - customSecret: {{ env "RELEASE_NAME" | default "laomine-frontend" }}-custom
+        image:
+          repository: {{ env "AWS_REGISTRY_IMAGE" | default "laomine/frontend" }}
+          tag: {{ env "CI_PIPELINE_ID" | default "latest" }}
+        annotations: 
+          "app.gitlab.com/env": {{ env "CI_ENVIRONMENT_SLUG" }}
+          "app.gitlab.com/app": {{ env "CI_PROJECT_PATH_SLUG" }}
+        resources: 
+          limits:
+            cpu: 1
+            memory: 2048Gi
+          requests:
+            cpu: 100m
+            memory: 1024Mi
+        service:
+          port: 3000
+        ingress:
+          ipWhitelist:
+            enabled: {{ .Environment.Values.ipWhitelist }}
+          hosts:
+            - host: {{ env "CI_ENVIRONMENT_HOST" | default "laomine.dev.laolab.org" }}
+              paths:
+              - path: "/"
+          tls:
+            - secretName: {{ env "RELEASE_NAME" | default "laomine-frontend" }}-tls
+              hosts:
+                 - {{ env "CI_ENVIRONMENT_HOST" | default "laomine.dev.laolab.org" }}
+
+
+environments:
+  default:
+    values:
+    - ipWhitelist: true
+  development:
+    values:
+    - ipWhitelist: false
+  production:
+    values:
+    - ipWhitelist: false
+
+helmDefaults:
+  wait: true
+  timeout: 600
+  createNamespace: false
