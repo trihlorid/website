@@ -9,7 +9,6 @@ const NotFoundPage: React.FC = () => (
       <Link href="/">
         <S.Button> Вернуться на главную</S.Button>
       </Link>
-
       <S.CountContainer>
         <S.CountText>Страница не найдена</S.CountText>
         <S.Count>[404]</S.Count>
